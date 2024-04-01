@@ -45,7 +45,7 @@ export default function ChatInput(props: ChatInputProps) {
           disabled={props.loading || !message.trim()}
         >
           <Send className='size-3.5' />
-          Send Message
+          Ask AI
         </Button>
       </div>
     </div>

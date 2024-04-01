@@ -70,7 +70,7 @@ export default function Chat() {
             />
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
-          <div className='text-xs font-medium leading-none'>You</div>
+          <div className='text-md font-medium leading-none'>You</div>
         </div>
         <div className='space-y-4'>
           {messages.map((message) => (
