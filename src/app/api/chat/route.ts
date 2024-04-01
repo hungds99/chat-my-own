@@ -10,7 +10,7 @@ import weaviate, { ApiKey } from 'weaviate-ts-client';
 export async function POST(req: Request) {
   const { messages, question } = await req.json();
 
-  // Use OpenAI for model completion
+  // Use OpenAI for model completion to allow lang chain to generate answers
   const llm = new ChatOpenAI({
     modelName: 'gpt-3.5-turbo',
     temperature: 0,
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
   // Create a chain retriever
   const answerGenerationPrompt =
     PromptTemplate.fromTemplate(`Answer the question based only on the following context:
-{context}
+    {context}
 
 Question: {question}`);
 

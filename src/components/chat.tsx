@@ -29,9 +29,25 @@ export default function Chat() {
       const reader = response.body?.getReader();
 
       let result = '';
+      // let messageIndex: number | null = null;
 
       for await (const chunk of readChunks(reader)) {
         result += chunk;
+
+        // setMessages((prevMessages) => {
+        //   let newMessages = [...prevMessages];
+        //   if (messageIndex === null || newMessages[messageIndex] === undefined) {
+        //     messageIndex = newMessages.length;
+        //     newMessages.push({
+        //       id: Math.random().toString(),
+        //       message: chunk,
+        //       role: 'bot',
+        //     });
+        //   } else if (newMessages[messageIndex] !== undefined) {
+        //     newMessages[messageIndex].message += chunk;
+        //   }
+        //   return newMessages;
+        // });
       }
 
       setMessages((prev: Message[]) => {
