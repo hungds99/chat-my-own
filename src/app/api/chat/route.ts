@@ -8,6 +8,7 @@ import { StreamingTextResponse } from 'ai';
 import weaviate, { ApiKey } from 'weaviate-ts-client';
 
 export async function POST(req: Request) {
+  console.debug('Received request to chat with OpenAI');
   const { messages, question } = await req.json();
 
   // Use OpenAI for model completion to allow lang chain to generate answers
@@ -27,6 +28,7 @@ export async function POST(req: Request) {
     );
   }
   // Connect to Weaviate
+  console.debug('Connecting to Weaviate...');
   const weaviateClient = weaviate.client({
     scheme: 'https',
     host: process.env.WEAVIATE_URL,
@@ -39,14 +41,16 @@ export async function POST(req: Request) {
     metadataKeys: ['source', 'title'],
   });
   const vectorStoreRetriever = vectorStore.asRetriever({});
+  console.debug('Connected to Weaviate');
 
   // Create a chain retriever
   const answerGenerationPrompt =
     PromptTemplate.fromTemplate(`Answer the question based only on the following context:
-    {context}
+{context}
 
 Question: {question}`);
 
+  console.debug('Retrieving answer for question: ', question);
   const retrievalChain = RunnableSequence.from([
     RunnableLambda.from((input: any) => input.question),
     {
@@ -63,6 +67,7 @@ Question: {question}`);
     llm,
     new StringOutputParser(),
   ]);
+  console.debug('Starting retrieval chain');
 
   const stream = await retrievalChain.stream({
     question: question,
