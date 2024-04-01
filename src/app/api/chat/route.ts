@@ -7,6 +7,8 @@ import { WeaviateStore } from '@langchain/weaviate';
 import { StreamingTextResponse } from 'ai';
 import weaviate, { ApiKey } from 'weaviate-ts-client';
 
+export const runtime = 'edge';
+
 export async function POST(req: Request) {
   console.debug('Received request to chat with OpenAI');
   const { messages, question } = await req.json();
