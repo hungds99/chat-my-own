@@ -7,6 +7,7 @@ import { Send } from 'lucide-react';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
+import { Markdown } from './markdown';
 
 export default function Chat() {
   const { messages, input, handleSubmit, handleInputChange, isLoading } = useChat({
@@ -45,8 +46,11 @@ export default function Chat() {
                   />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
-                <div className='rounded-lg p-3 bg-gray-100 dark:bg-gray-800'>
+                {/* <div className='rounded-lg p-3 bg-gray-100 dark:bg-gray-800'>
                   <div dangerouslySetInnerHTML={{ __html: message.content }} />
+                </div> */}
+                <div className='flex flex-col gap-4'>
+                  <Markdown>{message.content as string}</Markdown>
                 </div>
               </div>
             </div>
