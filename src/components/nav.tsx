@@ -1,4 +1,4 @@
-import { LayoutGrid } from 'lucide-react';
+import { LayoutGrid, User2Icon } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Nav() {
@@ -10,6 +10,14 @@ export default function Nav() {
       >
         <LayoutGrid className='h-4 w-4' />
         Home
+      </Link>
+
+      <Link
+        href='/open-ai'
+        className='flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-muted-foreground transition-all hover:text-primary'
+      >
+        <User2Icon className='h-4 w-4' />
+        Open AI
       </Link>
     </nav>
   );
